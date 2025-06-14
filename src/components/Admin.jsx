@@ -1,12 +1,7 @@
-// Admin.jsx
 import React, { useState, useId, useRef, useEffect } from "react";
 
-
-// Form for admin to add a new matcha drink
 function Admin({ addMatcha }) {
-  const idPrefix = useId();
-  const nameInputRef = useRef(null);
-
+  // Track form input values
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -14,76 +9,94 @@ function Admin({ addMatcha }) {
     price: ""
   });
 
+  // Generate unique IDs for accessibility
+  const nameId = useId();
+  const descId = useId();
+  const originId = useId();
+  const priceId = useId();
+
+  // Ref to auto-focus the first input
+  const nameInputRef = useRef(null);
+
+  // Focus the name input on component mount
   useEffect(() => {
-    if (nameInputRef.current) {
-      nameInputRef.current.focus();
-    }
+    nameInputRef.current?.focus();
   }, []);
 
-  // Track input changes and update local state
-  function handleChange(e) {
+  // Update form state as user types
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  }
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
-  // Submit new drink to JSON Server and update state via prop
-  function handleSubmit(e) {
+  // Handle form submit
+  const handleSubmit = (e) => {
     e.preventDefault();
+
+    const newDrink = {
+      ...formData,
+      price: parseFloat(formData.price)
+    };
+
     fetch("http://localhost:3002/matcha", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        ...formData,
-        price: parseFloat(formData.price)
-      })
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newDrink)
     })
-      .then(res => res.json())
-      .then(newDrink => {
-        addMatcha(newDrink);
+      .then((res) => res.json())
+      .then((data) => {
+        addMatcha(data);
         setFormData({ name: "", description: "", origin: "", price: "" });
+        nameInputRef.current?.focus(); // Refocus after submit
       })
-      .catch(err => console.error("Failed to add matcha:", err));
-  }
+      .catch((err) => console.error("Failed to add matcha:", err));
+  };
 
   return (
     <div className="admin">
-      <h2>Admin Portal</h2>
-      <form onSubmit={handleSubmit} className="add-matcha-form">
-        <label htmlFor={`${idPrefix}-name`}>Name:</label>
+      <h2>Add a New Matcha Drink</h2>
+      <form className="add-matcha-form" onSubmit={handleSubmit}>
+        <label htmlFor={nameId}>Name:</label>
         <input
           ref={nameInputRef}
-          id={`${idPrefix}-name`}
+          id={nameId}
           name="name"
           value={formData.name}
           onChange={handleChange}
         />
 
-        <label htmlFor={`${idPrefix}-description`}>Description:</label>
+        <label htmlFor={descId}>Description:</label>
         <input
-          id={`${idPrefix}-description`}
+          id={descId}
           name="description"
           value={formData.description}
           onChange={handleChange}
         />
 
-        <label htmlFor={`${idPrefix}-origin`}>Origin:</label>
+        <label htmlFor={originId}>Origin:</label>
         <input
-          id={`${idPrefix}-origin`}
+          id={originId}
           name="origin"
           value={formData.origin}
           onChange={handleChange}
         />
 
-        <label htmlFor={`${idPrefix}-price`}>Price:</label>
+        <label htmlFor={priceId}>Price:</label>
         <input
-          id={`${idPrefix}-price`}
-          name="price"
+          id={priceId}
           type="number"
+          name="price"
           value={formData.price}
           onChange={handleChange}
+          step="0.01"
         />
 
-        <button type="submit">Add Matcha</button>
+        <button type="submit">Add Drink</button>
       </form>
     </div>
   );

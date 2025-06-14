@@ -17,7 +17,7 @@ function MatchaList({ matchaDrinks, setMatchaDrinks }) {
         const updatedList = matchaDrinks.filter((drink) => drink.id !== id);
         setMatchaDrinks(updatedList);
       })
-      .catch((err) => console.error("Failed to delete:", err));
+      .catch((err) => console.error("Delete failed:", err));
   };
 
   const filteredDrinks = matchaDrinks.filter((drink) =>
@@ -30,23 +30,18 @@ function MatchaList({ matchaDrinks, setMatchaDrinks }) {
       <h2>Matcha Menu</h2>
       <input
         type="text"
-        placeholder="Search by name or origin..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="search-input"
+        placeholder="Search matcha..."
       />
-      {filteredDrinks.length === 0 ? (
-        <p>No matcha drinks found.</p>
-      ) : (
-        filteredDrinks.map((drink) => (
-          <MatchaItem
-            key={drink.id}
-            drink={drink}
-            onUpdate={handleUpdateDrink} 
-            onDelete={handleDeleteDrink}
-          />
-        ))
-      )}
+      {filteredDrinks.map((drink) => (
+        <MatchaItem
+          key={drink.id}
+          drink={drink}
+          onUpdate={handleUpdateDrink}
+          onDelete={handleDeleteDrink}
+        />
+      ))}
     </div>
   );
 }
