@@ -30,9 +30,10 @@ function MatchaList({ matchaDrinks, setMatchaDrinks }) {
       <h2>Matcha Menu</h2>
       <input
         type="text"
+        placeholder="Search by name or origin..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Search matcha..."
+        className="search-input"
       />
       {filteredDrinks.map((drink) => (
         <MatchaItem
