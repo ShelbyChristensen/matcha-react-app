@@ -1,38 +1,98 @@
-.App {
+/* General Layout */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f8f5;
+  color: #333;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #a8d5ba;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link {
+  color: #1b4d3e;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+/* Home Page */
+.home {
   text-align: center;
+  padding: 2rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.home h1 {
+  color: #2e7d4f;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Matcha List and Items */
+.matcha-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 2rem;
+  gap: 1.5rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.matcha-item {
+  background-color: white;
+  border: 1px solid #d2e6d6;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 250px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Search Input */
+.search-input {
+  padding: 8px;
+  width: 250px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* Admin Form */
+.admin {
+  padding: 2rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.add-matcha-form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 1rem;
+}
+
+.add-matcha-form input,
+.add-matcha-form button {
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.add-matcha-form button {
+  background-color: #81c784;
   color: white;
+  border: none;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.add-matcha-form button:hover {
+  background-color: #66bb6a;
 }

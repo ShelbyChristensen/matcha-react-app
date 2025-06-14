@@ -1,0 +1,32 @@
+{
+  "matcha": [
+    {
+      "id": 1,
+      "name": "Ceremonial Matcha",
+      "description": "Premium first-harvest matcha, stone-ground for purity.",
+      "origin": "Uji, Japan",
+      "price": 6.50
+    },
+    {
+      "id": 2,
+      "name": "Iced Coconut Matcha",
+      "description": "Matcha shaken with coconut milk over ice.",
+      "origin": "Shizuoka, Japan",
+      "price": 5.25
+    },
+    {
+      "id": 3,
+      "name": "Matcha Lemonade",
+      "description": "Citrusy lemonade blended with earthy matcha.",
+      "origin": "Kyoto, Japan",
+      "price": 4.95
+    },
+    {
+      "id": 4,
+      "name": "Honey Lavender Matcha",
+      "description": "Floral and sweet, infused with real lavender and honey.",
+      "origin": "Nishio, Japan",
+      "price": 5.75
+    }
+  ]
+}
